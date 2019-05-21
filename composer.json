@@ -1,5 +1,5 @@
 {
-    "name": "abdala/omnipay-pagseguro",
+    "name": "lucassmacedo/omnipay-pagseguro",
     "type": "library",
     "description": "PagSeguro gateway for OmniPay",
     "keywords": [
@@ -12,7 +12,7 @@
         "payment",
         "PHPeste"
     ],
-    "homepage": "https://github.com/abdala/omnipay-pagseguro",
+    "homepage": "https://github.com/lucassmacedo/omnipay-pagseguro",
     "license": "MIT",
     "authors": [
         {
@@ -24,9 +24,9 @@
         "psr-4": { "Omnipay\\PagSeguro\\" : "src/" }
     },
     "require": {
-        "omnipay/common": "~2.0"
+        "omnipay/common": "~3.0"
     },
     "require-dev": {
-        "omnipay/tests": "~2.0"
+        "omnipay/tests": "~3.0"
     }
 }
