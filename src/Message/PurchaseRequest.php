@@ -48,7 +48,7 @@ class PurchaseRequest extends AbstractRequest
 
         if ($extraAmount !== null && $extraAmount != 0) {
             if ($this->getCurrencyDecimalPlaces() > 0) {
-                if (is_int($extraAmount) || (is_string($extraAmount) && false === strpos((string) $extraAmount, '.'))) {
+                if (is_int($extraAmount) || (is_string($extraAmount) && false === strpos((string)$extraAmount, '.'))) {
                     throw new InvalidRequestException(
                         'Please specify extra amount as a string or float, with decimal places.'
                     );
@@ -95,7 +95,7 @@ class PurchaseRequest extends AbstractRequest
     {
         $data = [];
         $items = $this->getItems();
-        
+
         if ($items) {
             foreach ($items as $n => $item) {
                 $i = $n + 1;
@@ -156,22 +156,22 @@ class PurchaseRequest extends AbstractRequest
 
         return $data;
     }
-    
+
     public function getData()
     {
         $this->validate('currency', 'transactionReference');
 
         $data = [
-            'currency' => $this->getCurrency(),
-            'extraAmount' => $this->getExtraAmount(),
-            'reference' => $this->getTransactionReference(),
-            'redirectURL' => $this->getReturnUrl(),
+            'currency'        => $this->getCurrency(),
+            'extraAmount'     => $this->getExtraAmount(),
+            'reference'       => $this->getTransactionReference(),
+            'redirectURL'     => $this->getReturnUrl(),
             'notificationURL' => $this->getNotifyUrl(),
         ];
 
         return array_merge(parent::getData(), $data, $this->getItemData(), $this->getCustomerData(), $this->getShippingData());
     }
-    
+
     protected function createResponse($data)
     {
         return $this->response = new PurchaseResponse($this, $data);

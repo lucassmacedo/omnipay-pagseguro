@@ -28,7 +28,7 @@ class TransactionSearchResponse extends AbstractResponse
 
     public function isSuccessful()
     {
-        return isset($this->data['error']) ? false : true;
+        return isset($this->data->error) ? false : true;
     }
 
     protected function xml2array($xml)
@@ -37,7 +37,7 @@ class TransactionSearchResponse extends AbstractResponse
 
         foreach ($xml as $element) {
             $tag = $element->getName();
-            $e   = get_object_vars($element);
+            $e = get_object_vars($element);
 
             if (!empty($e)) {
                 $arr[$tag] = $element instanceof SimpleXMLElement ? xml2array($element) : $e;

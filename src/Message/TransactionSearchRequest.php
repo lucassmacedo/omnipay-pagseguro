@@ -41,7 +41,7 @@ class TransactionSearchRequest extends AbstractRequest
      */
     public function setStartDate($date)
     {
-        if (! $date instanceof DateTime) {
+        if (!$date instanceof DateTime) {
             $date = new DateTime($date);
         }
 
@@ -62,7 +62,7 @@ class TransactionSearchRequest extends AbstractRequest
      */
     public function setEndDate($date)
     {
-        if (! $date instanceof DateTime) {
+        if (!$date instanceof DateTime) {
             $date = new DateTime($date);
         }
 
@@ -130,9 +130,9 @@ class TransactionSearchRequest extends AbstractRequest
         }
 
         $data = [
-            'initialDate' => $startDate->format('Y-m-d\TH:i'),
-            'finalDate' => $finalDate->format('Y-m-d\TH:i'),
-            'page' => $this->getPage(),
+            'initialDate'    => $startDate->format('Y-m-d\TH:i'),
+            'finalDate'      => $finalDate->format('Y-m-d\TH:i'),
+            'page'           => $this->getPage(),
             'maxPageResults' => $this->getMaxPageResults(),
         ];
 
@@ -146,10 +146,9 @@ class TransactionSearchRequest extends AbstractRequest
             $this->getResource(),
             http_build_query($data, '', '&'));
 
-        $httpResponse = $this->httpClient->get($url)->send();
-        $xml = $httpResponse->xml();
+        $httpResponse = $this->httpClient->request('get', $url);
 
-        return $this->createResponse($this->xml2array($xml));
+        return $this->createResponse(simplexml_load_string($httpResponse->getBody()->getContents()));
     }
 
     public function getResource()

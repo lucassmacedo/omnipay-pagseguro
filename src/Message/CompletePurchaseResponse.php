@@ -8,6 +8,6 @@ class CompletePurchaseResponse extends AbstractResponse
 {
     public function isSuccessful()
     {
-        return isset($this->data['error']) ? false : true;
+        return isset($this->data->error) ? false : true;
     }
 }

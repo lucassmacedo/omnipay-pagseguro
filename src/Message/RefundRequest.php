@@ -17,8 +17,7 @@ namespace Omnipay\PagSeguro\Message;
  *   if ($response->isSuccessful()) {
  *   }
  * </code>
-*/
-
+ */
 class RefundRequest extends AbstractRequest
 {
     protected $resource = "transactions/refunds";
@@ -41,13 +40,12 @@ class RefundRequest extends AbstractRequest
     public function sendData($data)
     {
         $url = sprintf('%s/%s?%s', $this->getEndpoint(),
-                                      $this->getResource(),
-                                      http_build_query($data, '', '&'));
+            $this->getResource(),
+            http_build_query($data, '', '&'));
 
-        $httpResponse = $this->httpClient->post($url)->send();
-        $xml = $httpResponse->xml();
+        $httpResponse = $this->httpClient->request('post', $url);
 
-        return $this->createResponse($this->xml2array($xml));
+        return $this->createResponse(simplexml_load_string($httpResponse->getBody()->getContents()));
     }
 
     protected function createResponse($data)

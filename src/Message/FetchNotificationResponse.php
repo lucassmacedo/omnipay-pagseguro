@@ -15,6 +15,6 @@ class FetchNotificationResponse extends AbstractResponse
 {
     public function isSuccessful()
     {
-        return isset($this->data['code']);
+        return isset($this->data->code);
     }
 }

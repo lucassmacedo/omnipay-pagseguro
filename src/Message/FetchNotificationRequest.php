@@ -29,14 +29,14 @@ class FetchNotificationRequest extends AbstractRequest
         $this->validate('notificationCode');
 
         $url = sprintf('%s/%s/%s?%s', $this->getEndpoint(),
-                                      $this->getResource(),
-                                      $this->getNotificationCode(),
-                                      http_build_query($data, '', '&'));
+            $this->getResource(),
+            $this->getNotificationCode(),
+            http_build_query($data, '', '&'));
 
-        $httpResponse = $this->httpClient->get($url)->send();
-        $xml = $httpResponse->xml();
+        $httpResponse = $this->httpClient->request('get', $url);
 
-        return $this->createResponse($this->xml2array($xml));
+        return $this->createResponse(simplexml_load_string($httpResponse->getBody()->getContents()));
+
     }
 
     public function createResponse($data)
